@@ -1,0 +1,7 @@
+---
+# Restart the service using systemctl
+- name: restart_app
+  service:
+    name: "{{ payload }}" 
+    state: restarted
+

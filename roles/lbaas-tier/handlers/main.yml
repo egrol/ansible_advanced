@@ -1,0 +1,6 @@
+---
+# Restart the service using systemctl
+- name: restart_lbaas
+  service:
+    name: "{{ payload }}" 
+    state: restarted

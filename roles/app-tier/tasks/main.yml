@@ -1,0 +1,28 @@
+---
+# Install the Application
+- name: install {{ payload }}
+  yum:
+    name: "{{ payload }}"
+    state: latest
+
+# Set the systemctl state of to Enabled
+- name: start {{ payload }}
+  service:
+    name: "{{ payload }}"
+    enabled: yes
+
+# Create the default web root directory
+- name: create default web root directory
+  file:
+    path: "{{ default_web_root }}"
+    state: directory
+
+# Copy the index.html into the web root directory
+- name: copy static index.html to default web root
+  template:
+    src: index.html.j2
+    dest: "{{ default_web_root }}/index.html"
+    mode: 0644
+  notify:
+   - restart_app
+
